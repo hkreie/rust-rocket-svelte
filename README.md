@@ -75,12 +75,16 @@ Compile and run the rust rocket http server:
 cargo run  
 ```
 
-* Navigate to [localhost:8000](http://localhost:8000). You should see your app running.
+* Navigate to [localhost:37000](http://localhost:37000). You should see your app running.
 * Svelte client code is in `client` directory.
 ** Upon saving changes live-reloading via rollup will be rendered in the browser.
 * Rust server Rocket code is in `src` directory.
 ** To rebuild Rust code use cargo run after saving your changes.
 * All static files are served from `public` direcotry. Including the JS code compiled by Svelte Compiler.
+* To access the app from a remove device, you can change the listening address of Rocket. Be sure you are on a secure network. Adjust firewall rules 
+```
+export ROCKET_address=0.0.0.0
+```
 
 ## Building and running in production mode
 
@@ -90,6 +94,16 @@ To create an optimised version of the app:
 npm run build
 cargo build
 ```
+
+## Accessing the app from a remote device
+
+To access the app from a remove device, you can change the listening address of Rocket. Then restart cargo. Be sure you are on a secure network. 
+```
+export ROCKET_address=0.0.0.0
+sudo ufw allow 37000
+cargo run
+```
+
 
 ## Built With
 
@@ -118,10 +132,10 @@ Added Material UI components to create a first draft user interface.
 TODO: I did not keep track of all that I did, need to repeat the process.
 
 ```bash
+npm i rollup-plugin-svelte@6.1.1
 npm i svelte-material-ui
 npm i -D @smui/data-table
 npm i -D @smui/tab
 npm i -D @smui/tab-bar
 npm i svelte-material-icons
-
 ```

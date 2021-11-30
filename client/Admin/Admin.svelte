@@ -23,6 +23,7 @@
   import DiskSpace from "./DiskSpace.svelte";
   import Journal from "./Journal.svelte";
   import Status from "./Status.svelte";
+  import Uptime from "./Uptime.svelte";
 
   let clicked = "";
 
@@ -101,6 +102,8 @@
     <main class="main-content">
       {#if clicked == "Disk Space"}
         <DiskSpace />
+      {:else if clicked == "Uptime"}
+        <Uptime />
       {:else if clicked == "Status"}
         <Status />
       {:else if clicked == "Journal"}
@@ -132,12 +135,13 @@
     flex: auto;
     overflow: auto;
     position: relative;
-    flex-grow: 1;
+    flex-grow: 0;
   }
 
   .main-content {
+    float: right;
     overflow: auto;
-    padding: 16px;
+    padding: 50px;
     height: 100%;
     box-sizing: border-box;
   }

@@ -14,16 +14,41 @@ use crate::cli;
 use crate::db::GlobalState;
 use crate::foobar;
 
+use std::process::Command;
+
 // This is using /admin/diskspace route
 #[get("/diskspace")]
 fn diskspace() -> String {
-    format!("Rust says you have lots of disk space")
+    let output = Command::new("df")
+        .arg("-H")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
 }
+
+// This is using /admin/cputemp route
+#[get("/cputemp")]
+fn cputemp() -> String {
+    let contents1 = "cputemp";
+    format!("{}", contents1)
+}
+
+// This is using /admin/uptime route
+#[get("/uptime")]
+fn uptime() -> String {
+    let output = Command::new("uptime")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
+}
+
 
 // This is using /admin/status route
 #[get("/status")]
 fn status() -> String {
-    format!("Rust says your status is excellent")
+    format!("Rust says your status is super")
 }
 
 // This is using /hello route
@@ -58,7 +83,7 @@ pub fn build_app(opt: cli::Opt) -> Rocket {
     rocket::ignite()
         .manage(global_state)
         .mount("/hello", routes![hello, message])
-        .mount("/admin", routes![status, diskspace])
+        .mount("/admin", routes![status, diskspace, uptime, cputemp])
         // routes for which we have the #[openapi] attribute specified
         .mount("/", openapi_routes)
         // http:<hostname>:<port>/api presents a web page

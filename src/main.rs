@@ -20,7 +20,7 @@ fn journalctl2() -> Result<Stream<ChildStdout>, std::io::Error> {
     println!("journalctl starting");
     let child = Command::new("tail")
         .arg("-f")
-        .arg("/tmp/foo.txt")
+        .arg("/var/log/syslog")
         .stderr(Stdio::piped())
         .stdout(Stdio::piped())
         .spawn()?;
