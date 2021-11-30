@@ -2,7 +2,7 @@
   import { request } from "../Server/Request.svelte";
 
   // import Request from "../Server/Request.svelte";
-  let url = "/admin/status";
+  let url = "/admin/reboot";
   let promise = request(url);
   function handleClick() {
     promise = request(url);
@@ -10,7 +10,7 @@
 </script>
 
 <main>
-  <h1>Status</h1>
+  <h1>Reboot</h1>
   {#await promise}
     <p>...Retrieving status from Rust (with a 1 second sleep)</p>
   {:then text}

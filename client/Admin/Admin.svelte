@@ -24,6 +24,8 @@
   import Journal from "./Journal.svelte";
   import Status from "./Status.svelte";
   import Uptime from "./Uptime.svelte";
+  import Reboot from "./Reboot.svelte";
+  import Performance from "./Performance.svelte";
 
   let clicked = "";
 
@@ -108,6 +110,10 @@
         <Status />
       {:else if clicked == "Journal"}
         <Journal />
+      {:else if clicked == "Performance"}
+        <Performance />
+      {:else if clicked == "Power Cycle"}
+	<Reboot />
       {:else if clicked == ""}
         Device Manager Control Panel
       {:else}

@@ -30,10 +30,28 @@ fn diskspace() -> String {
 // This is using /admin/cputemp route
 #[get("/cputemp")]
 fn cputemp() -> String {
-    let contents1 = "cputemp";
-    format!("{}", contents1)
+    let s = "cputemp";
+    format!("{}", s)
 }
 
+// This is using /admin/cputemp route
+#[get("/journalctl")]
+fn journalctl() -> String {
+    let s = "journalctl";
+    format!("{}", s)
+}
+
+
+// This is using /admin/reboot route
+#[get("/reboot")]
+fn reboot() -> String {
+    let output = Command::new("reboot")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
+}
+//
 // This is using /admin/uptime route
 #[get("/uptime")]
 fn uptime() -> String {
@@ -44,11 +62,26 @@ fn uptime() -> String {
     format!("{}", s)
 }
 
+// This is using /admin/status route
+#[get("/performance")]
+fn performance() -> String {
+    let output = Command::new("systemd-analyze")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
+}
+
 
 // This is using /admin/status route
 #[get("/status")]
 fn status() -> String {
-    format!("Rust says your status is super")
+    let output = Command::new("top")
+        .args(["-b","-n","1"])
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
 }
 
 // This is using /hello route
@@ -83,7 +116,7 @@ pub fn build_app(opt: cli::Opt) -> Rocket {
     rocket::ignite()
         .manage(global_state)
         .mount("/hello", routes![hello, message])
-        .mount("/admin", routes![status, diskspace, uptime, cputemp])
+        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance])
         // routes for which we have the #[openapi] attribute specified
         .mount("/", openapi_routes)
         // http:<hostname>:<port>/api presents a web page
