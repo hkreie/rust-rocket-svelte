@@ -4,9 +4,21 @@
   import { request } from "../Server/Request.svelte";
 
   // import Request from "../Server/Request.svelte";
-  let url = "/admin/journalctl/0/5";
+  let url = "/admin/journalctl/0/5/10";
   let number = 5;
+  let offset = 0;
+  let cursor = 0;
+
   // let promise = request(url);
+  function handleOffset05() {
+      console.log("Offset 5");
+      start = 5;
+  }
+  function handleOffset10() {
+      console.log("Offset 10");
+      start = 10;
+  }
+
   function handleClick() {
     // promise = request(url);
     console.log("Trigger Starting log viewer");
@@ -22,7 +34,9 @@
   const source = {
     abort: async () => controller.abort(),
     fetch: async function* (cursor, offset, number) {
-      console.log("Journal.svelte: fetch called ", offset, ":", number);
+      //offset = 9;
+      number = 10;
+      console.log("Journal.svelte: fetch called ", cursor, ":", offset, ":", number);
       //if (controller) {
       //  console.log("Abort log viewer");
       //  controller.abort();
@@ -44,6 +58,7 @@
         const response = await fetch(
           //`/admin/journalctl?${new URLSearchParams(Object.entries(params))}`,
           `/admin/journalctl/${params.cursor}/${offset}/${number}`,
+          //`/admin/journalctl/${offset}/${number}`,
           {
             //signal: controller.signal,
           }
@@ -134,4 +149,6 @@
     start:{start} | selected: {selected} | follow: {follow ? "True" : "False"}
   </p>
   <button on:click={handleClick}>Start</button>
+  <button on:click={handleOffset05}>Offset 5</button>
+  <button on:click={handleOffset10}>Offset 10</button>
 </main>

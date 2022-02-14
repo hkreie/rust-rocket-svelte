@@ -6,6 +6,7 @@ use rocket_contrib::json::JsonValue;
 use rocket_contrib::serve::StaticFiles;
 use rocket_okapi::routes_with_openapi;
 use rocket_okapi::swagger_ui::{make_swagger_ui, SwaggerUIConfig};
+use rocket::response::Stream;
 
 use std::env;
 use std::sync::Mutex;
@@ -14,7 +15,39 @@ use crate::cli;
 use crate::db::GlobalState;
 use crate::foobar;
 
-use std::process::Command;
+//use std::process::Command;
+use std::process::{ChildStdout, Command, Stdio};
+
+#[get("/journalctl2")]
+fn journalctl2() -> Result<Stream<ChildStdout>, std::io::Error> {
+    println!("journalctl2 starting");
+    let child = Command::new("tail")
+        .arg("-f")
+        .arg("/tmp/foo.txt")
+        .stderr(Stdio::piped())
+        .stdout(Stdio::piped())
+        .spawn()?;
+
+    let response = Stream::from(child.stdout.unwrap());
+    println!("journalctl2 returning response");
+    Ok(response)
+}
+
+// return a number of lines from a given offset from the journalctl
+#[get("/journalctl/<cursor>/<offset>/<number>")]
+fn journalctl(cursor: usize, offset: usize, number: usize) -> String {
+    println!(
+        "journalctl getting lines {} .. {}",
+        offset,
+        offset + number - 1
+    );
+    let mut s = String::new();
+    for n in 0..number {
+        s.push_str(&format!("line {}\n", offset + n + 1));
+    }
+    s.push_str(&format!("cursor is {}\n", cursor));
+    s
+}
 
 // This is using /admin/diskspace route
 #[get("/diskspace")]
@@ -33,14 +66,6 @@ fn cputemp() -> String {
     let s = "cputemp";
     format!("{}", s)
 }
-
-// This is using /admin/cputemp route
-#[get("/journalctl")]
-fn journalctl() -> String {
-    let s = "journalctl";
-    format!("{}", s)
-}
-
 
 // This is using /admin/reboot route
 #[get("/reboot")]
@@ -116,7 +141,7 @@ pub fn build_app(opt: cli::Opt) -> Rocket {
     rocket::ignite()
         .manage(global_state)
         .mount("/hello", routes![hello, message])
-        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance])
+        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance,journalctl,journalctl2])
         // routes for which we have the #[openapi] attribute specified
         .mount("/", openapi_routes)
         // http:<hostname>:<port>/api presents a web page
