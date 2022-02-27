@@ -1,3 +1,0 @@
-export ROCKET_address=0.0.0.0
-sudo ufw allow 37000
-cargo run
