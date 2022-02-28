@@ -7,7 +7,7 @@ let menuItems = [
     'Disk Space',
     'Journal',
     'Performance',
-    'Power Cylcle',
+    'Power Cycle',
     'Launch Application',
     'Reload',
     'Settings',

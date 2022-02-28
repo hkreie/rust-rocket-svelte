@@ -1,5 +1,8 @@
 <script>
 
+// third-party components
+import LayoutGrid, { Cell } from '@smui/layout-grid';
+
 /* 2022-02-21 HK: Notes that We cannot dynamically components due to a limitation of bundlers
    so all of these icons will need to imported here, then we will load the correct component
    based on the menu item text. */
@@ -27,7 +30,7 @@ import List, { Item, Text } from "@smui/list";
 export let size = "2em";
 export let width = size;
 export let height = size;
-export let color = "gray";
+export let color = "rgb(98,0,238)";
 export let viewBox = "0 0 30 30";
 
 // menu item text
@@ -41,21 +44,42 @@ const menuClick = (text) => {
 
 </script>
 
-<Item class="item" href="javascript:void(0)" on:click={() => {menuClick(text)}} >
-    {#if text === 'Disk Space'}
-    <IDiskSpace {size} {color} {width} {height} {viewBox} />
-    {:else if text === 'Uptime'}
-    <IUptime {size} {color} {width} {height} {viewBox} />
-    {/if}
-    <Text>{text}</Text>
-  </Item>
+<Cell>
+    <div class="grid-cell">
+        <Item class="item" href="javascript:void(0)" on:click={() => {menuClick(text)}} >
+            {#if text === 'Uptime'}
+            <IUptime {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Disk Space'}
+            <IDiskSpace {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Journal'}
+            <IJournal {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Performance'}
+            <IPerformance {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Power Cycle'}
+            <IPowerCycle {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Launch Application'}
+            <ILaunch {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Reload'}
+            <IReload {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Settings'}
+            <ISettings {size} {color} {width} {height} {viewBox} />
+            {:else if text === 'Status'}
+            <IStatus {size} {color} {width} {height} {viewBox} />
+            {/if}
+            <Text><p>{text}</p></Text>
+        </Item>
+    </div>
+</Cell>
 
 <style>
 
-/*
-* :global(.item){
-    border:2px solid red;
+
+.grid-cell{
+    /*border: 2px solid rgb(98,0,238);*/
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    min-width:200px;
 }
-*/
+
 
 </style>
