@@ -57,22 +57,12 @@ Then we move the svelte related files into the `client` directory etc.
 
 ## Getting Started
 
-Start Rocket server and [Rollup](https://rollupjs.org) in two different terminals
-
-### Terminal #1
+Start [Rollup](https://rollupjs.org), which will invoke Rocket Server with `cargo run`.
 
 To build and hot reload svelte components, this will not launch a http server.
 
 ```bash
 npm run dev  
-```
-
-### Terminal #2
-
-Compile and run the rust rocket http server:
-
-```bash
-cargo run  
 ```
 
 * Navigate to [localhost:37000](http://localhost:37000). You should see your app running.
@@ -81,10 +71,7 @@ cargo run
 * Rust server Rocket code is in `src` directory.
 ** To rebuild Rust code use cargo run after saving your changes.
 * All static files are served from `public` direcotry. Including the JS code compiled by Svelte Compiler.
-* To access the app from a remove device, you can change the listening address of Rocket. Be sure you are on a secure network. Adjust firewall rules 
-```
-export ROCKET_address=0.0.0.0
-```
+
 
 ## Building and running in production mode
 
@@ -97,7 +84,7 @@ cargo build
 
 ## Accessing the app from a remote device
 
-To access the app from a remove device, you can change the listening address of Rocket. Then restart cargo. Be sure you are on a secure network. 
+To access the app from a remove device, you can change the listening address of Rocket by adding `address="0.0.0.0"` to Rocket.toml. Alternatively, you can export the `ROCKET_address` environment variable prior to starting `npm`. Be sure you are on a secure network. Adjust firewall rules as needed.
 ```
 export ROCKET_address=0.0.0.0
 sudo ufw allow 37000
@@ -127,9 +114,7 @@ Got communication working from Svelete client calling Rust asynchronously.
 
 ### Step 3
 
-Added Material UI components to create a first draft user interface.
-
-TODO: I did not keep track of all that I did, need to repeat the process.
+Added Material UI components for user interface.
 
 ```bash
 npm i rollup-plugin-svelte@6.1.1
@@ -137,5 +122,7 @@ npm i svelte-material-ui
 npm i -D @smui/data-table
 npm i -D @smui/tab
 npm i -D @smui/tab-bar
+npm i -D @smui/touch-target
+npm i -D @smui/layout-grid
 npm i svelte-material-icons
 ```
