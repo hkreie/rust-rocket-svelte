@@ -1,6 +1,7 @@
 <script>
   import Drawer, { AppContent, Content } from "@smui/drawer";
   import List, { Item, Text, Graphic } from "@smui/list";
+  import LayoutGrid, { Cell } from '@smui/layout-grid';
 
   // Icons for Components (my convention, prefix with 'I' as in IComponent)
   import ICheck from "svelte-material-icons/Check.svelte";
@@ -36,18 +37,38 @@
   export let viewBox = "0 0 30 30";
 </script>
 
+<!--
+<LayoutGrid>
+    <Cell>
+
+      <Item href="javascript:void(0)" on:click={() => (clicked = "Disk Space")}>
+      <div class="item">
+      <IDiskSpace {size} {color} {width} {height} {viewBox} />
+      <Text>Disk Space</Text>
+      </div>
+      </Item>
+
+    </Cell>
+    <Cell>
+      <Item href="javascript:void(0)" on:click={() => (clicked = "Uptime")}>
+        <IUptime {size} {color} {width} {height} {viewBox} />
+        <Text>Uptime</Text>
+      </Item>
+    </Cell>
+</LayoutGrid>
+-->
+
 <div class="drawer-container">
   <Drawer>
     <Content>
       <List>
-        <Item
-          href="javascript:void(0)"
-          on:click={() => (clicked = "Disk Space")}
-        >
+
+        <Item class="item" href="javascript:void(0)" on:click={() => (clicked = "Disk Space")} >
           <IDiskSpace {size} {color} {width} {height} {viewBox} />
           <Text>Disk Space</Text>
         </Item>
 
+        
         <Item href="javascript:void(0)" on:click={() => (clicked = "Journal")}>
           <IJournal {size} {color} {width} {height} {viewBox} />
           <Text>Journal</Text>
@@ -96,6 +117,8 @@
           <IStatus {size} {color} {width} {height} {viewBox} />
           <Text>Status</Text>
         </Item>
+
+        
       </List>
     </Content>
   </Drawer>
@@ -123,7 +146,14 @@
   </AppContent>
 </div>
 
+
 <style>
+
+  * :global(.item) {
+    border: 2px solid rgb(98,0,238);
+    text-align: center; 
+  }
+
   /* These classes are only needed because the
       drawer is in a container on the page. */
   .drawer-container {
@@ -145,10 +175,12 @@
   }
 
   .main-content {
-    float: right;
+    /*float: right;*/
     overflow: auto;
-    padding: 50px;
+    padding: 16px;
     height: 100%;
     box-sizing: border-box;
   }
+  
+
 </style>

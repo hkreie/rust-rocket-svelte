@@ -57,7 +57,7 @@ export default {
 	}
 };
 
-function serve() {
+/*function serve() {
 	let started = false;
 
 	return {
@@ -71,6 +71,27 @@ function serve() {
 				// 	shell: true
 				// });
 			}
+		}
+	};
+}*/
+
+function serve() {
+	let server;
+
+	function toExit() {
+		if (server) server.kill(0);
+	}
+
+	return {
+		writeBundle() {
+			if (server) return;
+			server = require('child_process').spawn('npm', ['run', 'start', '', ''], {
+				stdio: ['ignore', 'inherit', 'inherit'],
+				shell: true
+			});
+
+			process.on('SIGTERM', toExit);
+			process.on('exit', toExit);
 		}
 	};
 }

@@ -121,7 +121,7 @@ fn hello() -> String {
 fn message() -> JsonValue {
     json!({ "result" : "success",
             "message" : "Hi from Rust!"
-    })
+    }) 
 }
 
 /**

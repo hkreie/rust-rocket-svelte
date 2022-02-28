@@ -8,7 +8,7 @@
   let active = "Admin";
 </script>
 
-<link rel="stylesheet" href="./svelte-material-ui-bare.css" />
+<link rel="stylesheet" href="./svelte-material-ui-bare.css" /> 
 
 <div>
   <!--
@@ -27,5 +27,5 @@
     <Devices />
   {:else if active == "Help"}
     <Help />
-  {/if}
+  {/if} 
 </div>

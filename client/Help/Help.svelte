@@ -1,6 +1,7 @@
 <script>
   import Drawer, { AppContent, Content } from "@smui/drawer";
   import List, { Item, Text, Graphic } from "@smui/list";
+  import Menu from "../common/Menu.svelte"
 
   // Icons for Components (my convention, prefix with 'I' as in IComponent)
   import ICheck from "svelte-material-icons/Check.svelte";
@@ -23,75 +24,19 @@
   import DiskSpace from "./DiskSpace.svelte";
   import Status from "./Status.svelte";
 
-  let clicked = "";
+  let clicked;
+  const menuClick = (e) => { 
+    clicked = e.detail; 
+    console.log("Help: menuClick invoked: ", clicked);
+  }
 
-  export let size = "2em";
-  export let width = size;
-  export let height = size;
-  export let color = "gray";
-  export let viewBox = "0 0 30 30";
 </script>
 
 <div class="drawer-container">
   <Drawer>
     <Content>
       <List>
-        <Item
-          href="javascript:void(0)"
-          on:click={() => (clicked = "Disk Space")}
-        >
-          <IDiskSpace {size} {color} {width} {height} {viewBox} />
-          <Text>Disk Space</Text>
-        </Item>
-
-        <Item href="javascript:void(0)" on:click={() => (clicked = "Journal")}>
-          <IJournal {size} {color} {width} {height} {viewBox} />
-          <Text>Journal</Text>
-        </Item>
-
-        <Item href="javascript:void(0)" on:click={() => (clicked = "Uptime")}>
-          <IUptime {size} {color} {width} {height} {viewBox} />
-          <Text>Uptime</Text>
-        </Item>
-
-        <Item
-          href="javascript:void(0)"
-          on:click={() => (clicked = "Power Cycle")}
-        >
-          <IPowerCycle {size} {color} {width} {height} {viewBox} />
-          <Text>Power Cycle</Text>
-        </Item>
-
-        <Item
-          href="javascript:void(0)"
-          on:click={() => (clicked = "Launch Application")}
-        >
-          <ILaunch {size} {color} {width} {height} {viewBox} />
-          <Text>Launch Application</Text>
-        </Item>
-
-        <Item href="javascript:void(0)" on:click={() => (clicked = "Reload")}>
-          <IReload {size} {color} {width} {height} {viewBox} />
-          <Text>Reload</Text>
-        </Item>
-
-        <Item href="javascript:void(0)" on:click={() => (clicked = "Settings")}>
-          <ISettings {size} {color} {width} {height} {viewBox} />
-          <Text>Settings</Text>
-        </Item>
-
-        <Item
-          href="javascript:void(0)"
-          on:click={() => (clicked = "Performance")}
-        >
-          <IPerformance {size} {color} {width} {height} {viewBox} />
-          <Text>Performance</Text>
-        </Item>
-
-        <Item href="javascript:void(0)" on:click={() => (clicked = "Status")}>
-          <IStatus {size} {color} {width} {height} {viewBox} />
-          <Text>Status</Text>
-        </Item>
+        <Menu on:menuClick={menuClick} />
       </List>
     </Content>
   </Drawer>
