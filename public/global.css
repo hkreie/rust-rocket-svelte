@@ -53,6 +53,8 @@ button {
 	color: #333;
 	background-color: #f4f4f4;
 	outline: none;
+	height: 60px;
+	min-width: 200px;
 }
 
 button:disabled {

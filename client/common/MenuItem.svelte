@@ -44,8 +44,7 @@ const menuClick = (text) => {
 
 </script>
 
-<Cell>
-    <div class="grid-cell">
+<Cell class='menu-item-cell'>
         <Item class="item" href="javascript:void(0)" on:click={() => {menuClick(text)}} >
             {#if text === 'Uptime'}
             <IUptime {size} {color} {width} {height} {viewBox} />
@@ -68,17 +67,15 @@ const menuClick = (text) => {
             {/if}
             <Text><p>{text}</p></Text>
         </Item>
-    </div>
 </Cell>
 
 <style>
 
-
-.grid-cell{
+:global(.menu-item-cell){
     /*border: 2px solid rgb(98,0,238);*/
     border: 2px solid #ccc;
     border-radius: 6px;
-    min-width:200px;
+    min-width: 200px;
 }
 
 

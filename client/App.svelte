@@ -6,6 +6,10 @@
   import TabBar from "@smui/tab-bar";
   import Button from "@smui/button";
   let active = "Admin";
+  const forceReload = (rel) => {
+    active = "";
+    console.log("active:", active)
+  }
 </script>
 
 <link rel="stylesheet" href="./svelte-material-ui-bare.css" /> 
@@ -16,7 +20,7 @@
   -->
   <TabBar tabs={["Admin", "Devices", "Help"]} let:tab bind:active>
     <!-- Note: the `tab` property is required! -->
-    <Tab {tab}>
+    <Tab {tab} on:click={() => {forceReload(tab)}}>
       <Label>{tab}</Label>
     </Tab>
   </TabBar>

@@ -10,7 +10,7 @@
 </script>
 
 <main>
-  <h1>Reboot</h1>
+  <h1>Performance</h1>
   {#await promise}
     <p>...Retrieving status from Rust (with a 1 second sleep)</p>
   {:then text}
