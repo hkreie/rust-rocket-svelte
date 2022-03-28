@@ -87,6 +87,16 @@ fn uptime() -> String {
     format!("{}", s)
 }
 
+// This is using /admin/launch route
+#[get("/launch")]
+fn launch() -> String {
+    let output = Command::new("backendcommand")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
+}
+
 // This is using /admin/status route
 #[get("/performance")]
 fn performance() -> String {
@@ -141,7 +151,7 @@ pub fn build_app(opt: cli::Opt) -> Rocket {
     rocket::ignite()
         .manage(global_state)
         .mount("/hello", routes![hello, message])
-        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance,journalctl,journalctl2])
+        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance,journalctl,journalctl2, launch])
         // routes for which we have the #[openapi] attribute specified
         .mount("/", openapi_routes)
         // http:<hostname>:<port>/api presents a web page

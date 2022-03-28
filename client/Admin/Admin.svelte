@@ -8,6 +8,7 @@
   import Status from "./Status.svelte";
   import Uptime from "./Uptime.svelte";
   import Reboot from "./Reboot.svelte";
+  import Launch from "./Launch.svelte";
   import Performance from "./Performance.svelte";
 
   let clicked = "";
@@ -31,7 +32,9 @@
     {:else if clicked == "Performance"}
       <Performance />
     {:else if clicked == "Power Cycle"}
-      <Reboot />
+      <Reboot />    
+    {:else if clicked == "Launch Application"}
+      <Launch />
     {:else if clicked == ""}
     <LayoutGrid>
       <Menu on:menuClick={menuClick} />
