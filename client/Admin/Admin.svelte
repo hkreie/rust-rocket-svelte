@@ -3,13 +3,16 @@
 
   // Components
   import Menu from "../common/Menu.svelte"
-  import DiskSpace from "./DiskSpace.svelte";
-  import Journal from "./Journal.svelte";
-  import Status from "./Status.svelte";
+  
   import Uptime from "./Uptime.svelte";
+  import Journal from "./Journal.svelte";
   import Reboot from "./Reboot.svelte";
-  import Launch from "./Launch.svelte";
+  import Reload from "./Reload.svelte";
+  import Status from "./Status.svelte";
+  import DiskSpace from "./DiskSpace.svelte";
   import Performance from "./Performance.svelte";
+  import Launch from "./Launch.svelte";
+  import Settings from "./Settings.svelte"
 
   let clicked = "";
 
@@ -21,27 +24,31 @@
 </script>
 
 <main class="main-content">
-    {#if clicked == "Disk Space"}
-      <DiskSpace />
-    {:else if clicked == "Uptime"}
-      <Uptime />
-    {:else if clicked == "Status"}
-      <Status />
-    {:else if clicked == "Journal"}
-      <Journal />
-    {:else if clicked == "Performance"}
-      <Performance />
-    {:else if clicked == "Power Cycle"}
-      <Reboot />    
-    {:else if clicked == "Launch Application"}
-      <Launch />
-    {:else if clicked == ""}
-    <LayoutGrid>
-      <Menu on:menuClick={menuClick} />
-    </LayoutGrid>
-    {:else}
-      <p>you clicked {clicked}</p>
-    {/if}
+  {#if clicked == "Uptime"}
+    <Uptime />
+  {:else if clicked == "Journal"}
+    <Journal />
+  {:else if clicked == "Power Cycle"}
+    <Reboot />
+  {:else if clicked == "Reload"}
+    <Reload />
+  {:else if clicked == "Status"}
+    <Status />
+  {:else if clicked == "Disk Space"}
+    <DiskSpace />    
+  {:else if clicked == "Performance"}
+    <Performance />
+  {:else if clicked == "Launch Application"}
+    <Launch />
+  {:else if clicked == "Settings"}
+    <Settings />
+  {:else if clicked == ""}
+  <LayoutGrid>
+    <Menu on:menuClick={menuClick} />
+  </LayoutGrid>
+  {:else}
+    <p>you clicked {clicked}</p>
+  {/if}
 </main>
 
 
