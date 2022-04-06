@@ -67,6 +67,17 @@ fn cputemp() -> String {
     format!("{}", s)
 }
 
+// This is using /admin/settings route
+#[get("/settings")]
+fn settings() -> String {
+    let output = Command::new("ifconfig")
+        .arg("-a")
+        .output()
+        .expect("Failed to execute command");
+    let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
+    format!("{}", s)
+}
+
 // This is using /admin/reboot route
 #[get("/reboot")]
 fn reboot() -> String {
@@ -151,7 +162,7 @@ pub fn build_app(opt: cli::Opt) -> Rocket {
     rocket::ignite()
         .manage(global_state)
         .mount("/hello", routes![hello, message])
-        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, performance,journalctl,journalctl2, launch])
+        .mount("/admin", routes![status, diskspace, uptime, cputemp, reboot, settings, performance,journalctl,journalctl2, launch])
         // routes for which we have the #[openapi] attribute specified
         .mount("/", openapi_routes)
         // http:<hostname>:<port>/api presents a web page
