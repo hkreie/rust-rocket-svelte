@@ -23,7 +23,7 @@ export default {
 			css: css => {
 				//css.write('public/build/bundle.css');
 				css.write('bundle.css');
-				
+
 			}
 		}),
 
@@ -65,7 +65,7 @@ export default {
 			if (!started) {
 				started = true;
 				// replaced last argument from --dev - try watch next
-				// require('child_process').spawn('npm', ['run', 'start', '', ''],  
+				// require('child_process').spawn('npm', ['run', 'start', '', ''],
 				// {
 				// 	stdio: ['ignore', 'inherit', 'inherit'],
 				// 	shell: true

@@ -1,4 +1,3 @@
-
 # Rust-Svelte-on-Rust
 
 Starter template for [Svelte](https://svelte.dev) frontend apps with Rust [Rocket](https://rocket.rs) backend server.
@@ -10,7 +9,7 @@ Starter template for [Svelte](https://svelte.dev) frontend apps with Rust [Rocke
 * Rocket
 * NodeJs - [Install](https://nodejs.org/en/download/)
 
-We will use Rust nightly.
+We will use Rust nightly, which is enforced by `rust-toolchain.toml`.
 
 ## Background
 
@@ -25,7 +24,6 @@ Optional: Assuming you are not using this repository, to start with a clean slat
 npx degit sveltejs/template moz-todo-svelte
 cd moz-todo-svelte
 cargo new myproject
-#now move stuff around
 ```
 
 ## Installation
@@ -57,12 +55,14 @@ Then we move the svelte related files into the `client` directory etc.
 
 ## Getting Started
 
+Install dependencies with `npm install`.
+
 Start [Rollup](https://rollupjs.org), which will invoke Rocket Server with `cargo run`.
 
 To build and hot reload svelte components, this will not launch a http server.
 
 ```bash
-npm run dev  
+npm run dev
 ```
 
 * Navigate to [localhost:37000](http://localhost:37000). You should see your app running.
@@ -79,7 +79,7 @@ To create an optimised version of the app:
 
 ```bash
 npm run build
-cargo build
+cargo build --release
 ```
 
 ## Accessing the app from a remote device
@@ -90,7 +90,6 @@ export ROCKET_address=0.0.0.0
 sudo ufw allow 37000
 cargo run
 ```
-
 
 ## Built With
 
@@ -115,14 +114,3 @@ Got communication working from Svelete client calling Rust asynchronously.
 ### Step 3
 
 Added Material UI components for user interface.
-
-```bash
-npm i rollup-plugin-svelte@6.1.1
-npm i svelte-material-ui
-npm i -D @smui/data-table
-npm i -D @smui/tab
-npm i -D @smui/tab-bar
-npm i -D @smui/touch-target
-npm i -D @smui/layout-grid
-npm i svelte-material-icons
-```
