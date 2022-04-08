@@ -68,7 +68,7 @@ fn cputemp() -> String {
 }
 
 // This is using /admin/settings route
-#[get("/settings")]
+/*#[get("/settings")]
 fn settings() -> String {
     let output = Command::new("ifconfig")
         .arg("-a")
@@ -76,6 +76,11 @@ fn settings() -> String {
         .expect("Failed to execute command");
     let s = String::from_utf8(output.stdout).expect("Found invalid UTF-8");
     format!("{}", s)
+}*/
+
+#[get("/settings/<arg1>/<arg2>")]
+fn settings(arg1: String, arg2: u8) -> String {
+    format!("arg1: {}, arg2: {}", arg1, arg2)
 }
 
 // This is using /admin/reboot route
