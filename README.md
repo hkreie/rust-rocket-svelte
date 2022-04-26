@@ -5,26 +5,15 @@ Starter template for [Svelte](https://svelte.dev) frontend apps with Rust [Rocke
 ## Requirements
 
 * Rust  - [Install](https://www.rust-lang.org/tools/install)
-* Svelte
-* Rocket
 * NodeJs - [Install](https://nodejs.org/en/download/)
 
 We will use Rust nightly, which is enforced by `rust-toolchain.toml`.
+Rust will detect this file and install the specified version as needed.
 
 ## Background
 
 Create a new project based on this example:
 [Mozilla Developer Network, Getting Started with Svelte](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/Svelte_getting_started)
-
-## Starting from scratch
-
-Optional: Assuming you are not using this repository, to start with a clean slate for Rust/Svelte
-
-```bash
-npx degit sveltejs/template moz-todo-svelte
-cd moz-todo-svelte
-cargo new myproject
-```
 
 ## Installation
 
@@ -55,7 +44,7 @@ Then we move the svelte related files into the `client` directory etc.
 
 ## Getting Started
 
-Install dependencies with `npm install`.
+Install dependencies with `npm install` and `cargo build`.
 
 Start [Rollup](https://rollupjs.org), which will invoke Rocket Server with `cargo run`.
 
