@@ -5,15 +5,6 @@ extern crate rocket;
 #[macro_use]
 extern crate rocket_contrib;
 
-use rocket::response::Stream;
-use rocket_contrib::json::JsonValue;
-
-// use rocket::request::Form;
-// use rocket::http::{Cookie, Cookies};
-// use rocket_contrib::json::Json;
-//use std::process::{ChildStdout, Command, Stdio};
-//use std::{thread, time};
-
 mod cli;
 mod console;
 mod db;
@@ -23,7 +14,7 @@ mod rest;
 
 #[allow(dead_code)]
 const BUILD_DATE: &'static str = "20211006_171846";
-//
+
 // for base route api
 fn main() {
     let opt = cli::parse_args();

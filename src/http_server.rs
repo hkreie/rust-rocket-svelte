@@ -1,7 +1,4 @@
 use rocket::Rocket;
-//use rocket::get;
-//use rocket_contrib::json::Json;
-//use rocket_okapi::{openapi, routes_with_openapi, JsonSchema};
 use rocket_contrib::json::JsonValue;
 use rocket_contrib::serve::StaticFiles;
 use rocket_okapi::routes_with_openapi;
@@ -15,7 +12,6 @@ use crate::cli;
 use crate::db::GlobalState;
 use crate::foobar;
 
-//use std::process::Command;
 use std::process::{ChildStdout, Command, Stdio};
 
 #[get("/journalctl2")]
@@ -147,13 +143,13 @@ fn hello() -> String {
 fn message() -> JsonValue {
     json!({ "result" : "success",
             "message" : "Hi from Rust!"
-    }) 
+    })
 }
 
 /**
 Each endpoint has an associated function defined in the corresponding module routes.rs file
 */
-/// Launch Rocket HTTP Server
+// Launch Rocket HTTP Server
 pub fn build_app(opt: cli::Opt) -> Rocket {
     env::set_var("ROCKET_PORT", opt.port.to_string());
     let global_state = Mutex::new(GlobalState::new(opt));
